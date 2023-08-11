@@ -1,30 +1,31 @@
 from django.db import models
 
 
-class Providers(models.Model):
+class DBMixin(models.Model):
+    using = 'default'  # По умолчанию, используем default базу данных
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        using_db = getattr(self, 'using', self.using)
+        super().save(using=using_db, *args, **kwargs)
+
+
+class Providers(DBMixin):
     provider_name = models.CharField(max_length=255)
 
-    class Meta:
-        app_label = 'goods'
-        using = 'default'
 
 
-class Categories(models.Model):
+class Categories(DBMixin):
     category_name = models.CharField(max_length=255)
 
-    class Meta:
-        app_label = 'goods'
-        using = 'default'
 
 
-class Goods(models.Model):
+class Goods(DBMixin):
     name = models.CharField(max_length=255)
     provider_id = models.ForeignKey(to=Providers, on_delete=models.CASCADE, null=True)
     category_id = models.ForeignKey(to=Categories, on_delete=models.CASCADE, null=True)
     price = models.DecimalField(decimal_places=2, max_digits=6)
     count = models.PositiveIntegerField()
     description = models.TextField()
-
-    class Meta:
-        app_label = 'goods'
-        using = 'default'
