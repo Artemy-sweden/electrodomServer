@@ -1,9 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
 
 from goods.models import Categories
-from goods.serializers import CategoriesSerializer
+from goods.serializers import CategorySerializer
 
 
 class CategoriesViewSet(ModelViewSet):
-    queryset = Categories.object.all()
-    serializer_class = CategoriesSerializer
+    queryset = Categories.objects.all()
+    serializer_class = CategorySerializer
+
+

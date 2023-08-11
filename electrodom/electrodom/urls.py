@@ -19,7 +19,7 @@ from rest_framework.routers import DefaultRouter
 from goods.views import CategoriesViewSet
 
 cat = DefaultRouter()
-cat.register('comments', CategoriesViewSet)
+cat.register('categories', CategoriesViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
