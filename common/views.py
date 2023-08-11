@@ -1,12 +1,8 @@
-from django.db import models
+from rest_framework.viewsets import ModelViewSet
+
+from electrodom.goods.models import Categories
 
 
-class DBMixin(models.Model):
-    using = 'default'  # По умолчанию, используем default базу данных
-
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        using_db = getattr(self, 'using', self.using)
-        super().save(using=using_db, *args, **kwargs)
+class CategoriesViewSet(ModelViewSet):
+    queryset = Categories.object.all()
+    serializer_class = CategoriesSerializer

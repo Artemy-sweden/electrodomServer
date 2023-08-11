@@ -16,10 +16,8 @@ class Providers(DBMixin):
     provider_name = models.CharField(max_length=255)
 
 
-
 class Categories(DBMixin):
     category_name = models.CharField(max_length=255)
-
 
 
 class Goods(DBMixin):
