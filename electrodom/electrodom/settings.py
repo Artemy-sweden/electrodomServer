@@ -75,9 +75,9 @@ WSGI_APPLICATION = 'electrodom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.contrib.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'goods',
-        'USER': 'admin',
+        'USER': 'postgres',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '5432'
