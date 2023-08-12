@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from goods.models import Categories
+from goods.models import Categories, Characteristic, GoodsCharacteristic
 
 from goods.models import Providers
 
@@ -19,4 +19,14 @@ class SitePhotosAdmin(admin.ModelAdmin):
 
 @admin.register(Goods)
 class SitePhotosAdmin(admin.ModelAdmin):
-    fields = ('name', 'provider_id', 'category_id', 'price', 'count', 'description')
+    pass
+
+
+@admin.register(Characteristic)
+class CharacteristikAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(GoodsCharacteristic)
+class GoodsCharacteristikAdmin(admin.ModelAdmin):
+    pass
