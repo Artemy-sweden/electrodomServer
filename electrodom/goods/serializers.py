@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from goods.models import Categories
+from goods.models import Categories, Characteristic, GoodsCharacteristic
 
 from goods.models import Providers
 
@@ -18,7 +18,24 @@ class ProviderSerializer(serializers.ModelSerializer):
         fields = ['id', 'provider_name']
 
 
+class CharacteristicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Characteristic
+        fields = '__all__'
+
+
+class GoodsCharacteristicSerializer(serializers.ModelSerializer):
+    characteristic = CharacteristicSerializer()
+
+    class Meta:
+        model = GoodsCharacteristic
+        fields = ['characteristic', 'value']
+
+
 class GoodsSerializer(serializers.ModelSerializer):
+    characteristics = GoodsCharacteristicSerializer(many=True, source='goodscharacteristic_set')
+
     class Meta:
         model = Goods
-        fields = ['id', 'name', 'provider_id', 'category_id', 'price', 'count', 'description']
+        fields = ['id', 'name', 'provider_id', 'category_id', 'price', 'count', 'description', 'characteristics']
+
