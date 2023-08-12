@@ -36,3 +36,11 @@ class Basket(models.Model):
     count = models.PositiveSmallIntegerField()
     # using = 'users'
 
+    # def save(self, *args, **kwargs):
+    #     existing_basket = Basket.objects.filter(user=self.user, goods=self.goods).first()
+    #
+    #     if existing_basket:
+    #         existing_basket.count += self.count
+    #         existing_basket.save()
+    #     else:
+    #         super(Basket, self).save(args, **kwargs)
