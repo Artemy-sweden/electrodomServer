@@ -24,6 +24,8 @@ class Goods(models.Model):
     name = models.CharField(max_length=255)
     provider_id = models.ForeignKey(to=Providers, on_delete=models.CASCADE, null=True)
     category_id = models.ForeignKey(to=Categories, on_delete=models.CASCADE, null=True)
+    # image = models.ImageField(upload_to='product_images', blank=True)
+
     price = models.DecimalField(decimal_places=2, max_digits=6)
     count = models.PositiveIntegerField()
     description = models.TextField()
