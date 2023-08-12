@@ -34,3 +34,4 @@ class GoodsViewSet(ModelViewSet):
     ordering_fields = ['id', 'price']
 
 
+
