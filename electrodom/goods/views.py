@@ -1,3 +1,4 @@
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.viewsets import ModelViewSet
 
 from goods.models import Categories
@@ -24,5 +25,5 @@ class ProvidersViewSet(ModelViewSet):
 class GoodsViewSet(ModelViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
-
+    pagination_class = LimitOffsetPagination
 

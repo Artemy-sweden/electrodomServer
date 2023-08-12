@@ -16,6 +16,8 @@ class Providers(models.Model):
     provider_name = models.CharField(max_length=255)
 
 
+
+
 class Categories(models.Model):
     category_name = models.CharField(max_length=255)
 
