@@ -13,10 +13,10 @@ from goods.models import Goods
 #         using_db = getattr(self, 'using', self.using)
 #         super().save(using=using_db, *args, **kwargs)
 
-
 class User(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
     photo = models.ImageField(upload_to='users_photos', blank=True)
     phone_number = models.CharField(max_length=13)
     address = models.TextField()
