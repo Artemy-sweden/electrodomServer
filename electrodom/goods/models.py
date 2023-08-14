@@ -15,13 +15,22 @@ from django.db import models
 class Providers(models.Model):
     provider_name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f'{self.provider_name}'
+
 
 class Categories(models.Model):
     category_name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f'{self.category_name}'
+
 
 class Characteristic(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Goods(models.Model):
@@ -32,6 +41,9 @@ class Goods(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=6)
     count = models.PositiveIntegerField()
     description = models.TextField()
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class GoodsCharacteristic(models.Model):

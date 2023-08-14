@@ -8,25 +8,24 @@ from goods.models import Goods
 
 
 @admin.register(Categories)
-class SitePhotosAdmin(admin.ModelAdmin):
+class CategoriesAdmin(admin.ModelAdmin):
     fields = ('category_name', )
 
 
 @admin.register(Providers)
-class SitePhotosAdmin(admin.ModelAdmin):
+class ProvidersAdmin(admin.ModelAdmin):
     fields = ('provider_name', )
 
 
-@admin.register(Goods)
-class SitePhotosAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Characteristic)
-class CharacteristikAdmin(admin.ModelAdmin):
+class CharacteristicAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(GoodsCharacteristic)
-class GoodsCharacteristikAdmin(admin.ModelAdmin):
-    pass
+class GoodsCharacteristicInline(admin.StackedInline):
+    model = GoodsCharacteristic
+    extra = 1  # Количество пустых форм для добавления характеристик по умолчанию
+
+@admin.register(Goods)
+class GoodsAdmin(admin.ModelAdmin):
+    inlines = [GoodsCharacteristicInline]  # Добавляем stacked inline характеристики к админской форме товара
