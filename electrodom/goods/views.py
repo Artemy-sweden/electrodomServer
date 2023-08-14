@@ -1,3 +1,5 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.viewsets import ModelViewSet
 
@@ -26,4 +28,10 @@ class GoodsViewSet(ModelViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     pagination_class = LimitOffsetPagination
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['category_id', 'price', ]
+    search_fields = ['description', 'name']
+    ordering_fields = ['id', 'price']
+
+
 
