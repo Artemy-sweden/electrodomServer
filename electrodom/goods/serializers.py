@@ -33,7 +33,7 @@ class GoodsCharacteristicSerializer(serializers.ModelSerializer):
 
 
 class GoodsSerializer(serializers.ModelSerializer):
-    characteristics = GoodsCharacteristicSerializer(many=True, source='goodscharacteristic_set')
+    characteristics = GoodsCharacteristicSerializer(many=True, source='goodscharacteristic_set', required=False)
 
     class Meta:
         model = Goods

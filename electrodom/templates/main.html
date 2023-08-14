@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fetching and Creating Goods</title>
+</head>
+<body>
+  <button id="fetch-button">Fetch Goods</button> <!-- Кнопка для загрузки данных -->
+  <button id="post-button">Create Good</button> <!-- Кнопка для создания товара -->
+
+  <!-- Поля для ввода данных -->
+  <input type="text" id="name-input" placeholder="Name">
+  <input type="number" id="provider-input" placeholder="Provider ID">
+  <input type="number" id="category-input" placeholder="Category ID">
+  <input type="text" id="price-input" placeholder="Price">
+  <input type="number" id="count-input" placeholder="Count">
+  <input type="text" id="description-input" placeholder="Description">
+
+  <pre id="json-output"></pre> <!-- Элемент <pre> для отображения JSON-данных -->
+
+  <script>
+    const fetchButton = document.getElementById("fetch-button");
+    const postButton = document.getElementById("post-button");
+    const jsonOutput = document.getElementById("json-output");
+
+    fetchButton.addEventListener("click", () => {
+      fetchGoods();
+    });
+
+    postButton.addEventListener("click", () => {
+      createGood();
+    });
+
+    async function fetchGoods() {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/goods/");
+        const data = await response.json();
+        displayJson(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    async function createGood() {
+      const newGood = {
+        "name": document.getElementById("name-input").value,
+        "provider_id": parseInt(document.getElementById("provider-input").value),
+        "category_id": parseInt(document.getElementById("category-input").value),
+        "price": document.getElementById("price-input").value,
+        "count": parseInt(document.getElementById("count-input").value),
+        "description": document.getElementById("description-input").value
+      };
+
+      try {
+        const response = await fetch("http://127.0.0.1:8000/goods/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newGood)
+        });
+
+        const createdGood = await response.json();
+        displayJson(createdGood);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    function displayJson(data) {
+      jsonOutput.textContent = JSON.stringify(data, null, 2); // Отформатированный JSON с отступами
+    }
+  </script>
+</body>
+</html>
