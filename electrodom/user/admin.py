@@ -5,7 +5,7 @@ from user.models import User, Comment, Basket
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    fields = ['first_name', 'last_name', 'photo', 'phone_number', 'address']
+    fields = ['first_name', 'last_name', 'email', 'password', 'photo', 'phone_number', 'address']
 
 
 @admin.register(Comment)
