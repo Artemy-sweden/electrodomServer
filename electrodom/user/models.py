@@ -30,18 +30,21 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractUser):
     username = None
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-    photo = models.ImageField(upload_to='users_photos', blank=True)
-    phone_number = models.CharField(max_length=13, blank=True)
-    address = models.TextField(blank=True)
-    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30, blank=True, verbose_name='Имя')
+    last_name = models.CharField(max_length=30, blank=True, verbose_name='Фамилия')
+    photo = models.ImageField(upload_to='users_photos', blank=True, verbose_name='Фото')
+    phone_number = models.CharField(max_length=13, blank=True, verbose_name='Телефон')
+    address = models.TextField(blank=True, verbose_name='Адрес')
+    email = models.EmailField(unique=True, verbose_name='Почта')
 
-    # Убираем поле username и указываем email как уникальное поле аутентификации
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["phone_number"]
 
     objects = CustomUserManager()
+
+    class Meta:
+        verbose_name = 'пользователя'
+        verbose_name_plural = 'Пользователи'
 
     def __str__(self):
         return self.email
@@ -50,23 +53,26 @@ class User(AbstractUser):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=False)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=False, verbose_name='Пользователь')
     comment_text = models.TextField(verbose_name='Текст')
     comment_date = models.DateTimeField(verbose_name='Дата создания')
-    # using = 'users'
+
+    class Meta:
+        verbose_name = 'комментарий'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return self.user
 
 
 class Basket(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=False)
-    goods = models.ForeignKey(to=Goods, on_delete=models.CASCADE, null=False)
-    count = models.PositiveSmallIntegerField()
-    # using = 'users'
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=False, verbose_name='Пользователь')
+    goods = models.ForeignKey(to=Goods, on_delete=models.CASCADE, null=False, verbose_name='Товар')
+    count = models.PositiveSmallIntegerField(verbose_name='Количество')
 
-    # def save(self, *args, **kwargs):
-    #     existing_basket = Basket.objects.filter(user=self.user, goods=self.goods).first()
-    #
-    #     if existing_basket:
-    #         existing_basket.count += self.count
-    #         existing_basket.save()
-    #     else:
-    #         super(Basket, self).save(args, **kwargs)
+    class Meta:
+        verbose_name = 'корзину'
+        verbose_name_plural = 'Корзины'
+
+    def __str__(self):
+        return f'Корзина пользователя: {self.user}'
