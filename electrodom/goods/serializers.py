@@ -34,8 +34,9 @@ class GoodsCharacteristicSerializer(serializers.ModelSerializer):
 
 class GoodsSerializer(serializers.ModelSerializer):
     characteristics = GoodsCharacteristicSerializer(many=True, source='goodscharacteristic_set', required=False)
+    category = CategorySerializer(source='category_id')
 
     class Meta:
         model = Goods
-        fields = ['id', 'name', 'provider_id', 'category_id', 'price', 'count', 'description', 'characteristics']
+        fields = ['id', 'name', 'provider_id', 'category', 'price', 'count', 'description', 'characteristics']
 
