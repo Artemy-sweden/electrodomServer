@@ -13,21 +13,33 @@ from django.db import models
 
 
 class Providers(models.Model):
-    provider_name = models.CharField(max_length=255)
+    provider_name = models.CharField(max_length=255, verbose_name='Имя поставщика')
+
+    class Meta:
+        verbose_name = 'поставщика'
+        verbose_name_plural = 'Поставщики'
 
     def __str__(self):
         return f'{self.provider_name}'
 
 
 class Categories(models.Model):
-    category_name = models.CharField(max_length=255, )
+    category_name = models.CharField(max_length=255, verbose_name='Категория')
+
+    class Meta:
+        verbose_name = 'категорию'
+        verbose_name_plural = 'Категории'
 
     def __str__(self):
         return f'{self.category_name}'
 
 
 class Characteristic(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, verbose_name='Характеристика')
+
+    class Meta:
+        verbose_name = 'характеристику'
+        verbose_name_plural = 'Характеристики'
 
     def __str__(self):
         return f'{self.name}'
@@ -44,7 +56,7 @@ class Goods(models.Model):
 
     class Meta:
         verbose_name = 'товар'
-        verbose_name_plural = 'Товаров'
+        verbose_name_plural = 'Товары'
 
     def __str__(self):
         return f'{self.name}'
@@ -54,6 +66,10 @@ class GoodsCharacteristic(models.Model):
     goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name='Товар')
     characteristic = models.ForeignKey(Characteristic, on_delete=models.CASCADE, verbose_name='Характеристика')
     value = models.CharField(max_length=50, verbose_name='Значение характеристики')
+
+    class Meta:
+        verbose_name = 'характеристика'
+        verbose_name_plural = 'Характеристики'
 
     def __str__(self):
         return f'{self.characteristic}'
