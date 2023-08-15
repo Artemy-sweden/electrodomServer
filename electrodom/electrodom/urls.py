@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
 from rest_framework.routers import DefaultRouter
+from .yasg import urlpatterns as doc_urls
 
 from user.views import UserViewSet, CommentViewSet, BasketViewSet
 from goods.views import CategoriesViewSet
@@ -25,3 +26,4 @@ urlpatterns = [
     re_path(r'^auth/', include('djoser.urls.authtoken')),
 ] + router.urls
 
+urlpatterns += doc_urls
