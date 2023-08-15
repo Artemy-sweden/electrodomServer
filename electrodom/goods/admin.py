@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from goods.models import Categories, Characteristic, GoodsCharacteristic
 
@@ -26,6 +27,15 @@ class GoodsCharacteristicInline(admin.StackedInline):
     model = GoodsCharacteristic
     extra = 1  # Количество пустых форм для добавления характеристик по умолчанию
 
+
 @admin.register(Goods)
 class GoodsAdmin(admin.ModelAdmin):
-    inlines = [GoodsCharacteristicInline]  # Добавляем stacked inline характеристики к админской форме товара
+    inlines = [GoodsCharacteristicInline]
+    Goods.__str__.short_description = 'Товар'
+    readonly_fields = ('get_html_photo',)
+
+    def get_html_photo(self, object):
+        if object.commenter_avatar:
+            return mark_safe(f"<img src='{object.image.url}' width=100>")
+
+    get_html_photo.short_description = 'Фото'
