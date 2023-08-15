@@ -26,3 +26,5 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'first_name', 'last_name', 'email', 'password', 'photo', 'phone_number', 'address', 'baskets']
+        ref_name = 'CustomUserSerializer'  # Уникальное имя для этого сериализатора
+
