@@ -50,8 +50,6 @@ class User(AbstractUser):
         return self.email
 
 
-
-
 class Comment(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=False, verbose_name='Пользователь')
     comment_text = models.TextField(verbose_name='Текст')
