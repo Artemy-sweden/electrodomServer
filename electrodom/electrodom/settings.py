@@ -9,27 +9,15 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import environ
+
 from pathlib import Path
 # from user.models import User
 
 
-env = environ.Env(
-    DEBUG=(bool),
-    SECRET_KEY=(str),
 
-    DATABASE_NAME=(str),
-    DATABASE_USER=(str),
-    DATABASE_PASSWORD=(str),
-    DATABASE_HOST=(str),
-    DATABASE_PORT=(str),
-)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#environ
-
-environ.Env.read_env(BASE_DIR / '.env')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,10 +29,10 @@ from corsheaders.defaults import default_methods
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = django-insecure-_&de1ejn6r322c#+k=8v233#1l$-7(pu7ra^bt3v$n5#-l-$+1
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -120,11 +108,11 @@ WSGI_APPLICATION = 'electrodom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT'),
+        'NAME': 'electro6_goods',
+        'USER': 'electro6_ruslan',
+        'PASSWORD': 'Ruslan31052005',
+        'HOST': 'localhost',
+        'PORT': '5432',
     },
     'users': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
