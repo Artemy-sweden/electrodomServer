@@ -107,21 +107,13 @@ WSGI_APPLICATION = 'electrodom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'electro6_goods',
-        'USER': 'electro6_ruslan',
-        'PASSWORD': 'Ruslan31052005',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
-    'users': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'users',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'goods',
+        'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '5432'
-    }
+        'PORT': '3306',
+    },
 }
 
 # Password validation
