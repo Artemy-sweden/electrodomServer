@@ -31,14 +31,15 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
+
 class User(AbstractUser):
     username = None
     first_name = models.CharField(max_length=30, blank=True, verbose_name='Имя')
     last_name = models.CharField(max_length=30, blank=True, verbose_name='Фамилия')
     photo = models.ImageField(upload_to='users_photos', blank=True, verbose_name='Фото')
     phone_number = models.CharField(max_length=13, blank=True, verbose_name='Телефон')
-    address = models.TextField(blank=True, verbose_name='Адрес')
-    email = models.EmailField(unique=True, verbose_name='Почта')
+    address = models.TextField(blank=True, verbose_name='Адрес', max_length=191)
+    email = models.EmailField(unique=True, verbose_name='Почта', max_length=30)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["phone_number"]

@@ -173,8 +173,8 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.AnonRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'user': '20/minute',
-        'anon': '10/minute'
+        'user': '30/minute',
+        'anon': '20/minute'
     }
 
 }
