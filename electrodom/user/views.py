@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet, ModelViewSet
 
@@ -13,6 +14,9 @@ from goods.models import Goods
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
 
 
 class CommentViewSet(ModelViewSet):
