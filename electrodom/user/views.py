@@ -1,10 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet, ModelViewSet
 
 from user.models import User, Comment, Basket
+from user.permissions import AllowPostWithoutAutheticated
 
 from user.serializers import UserSerializer, CommentSerializer, BasketSerializer
 
@@ -25,10 +27,17 @@ def create_token(func):
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (AllowPostWithoutAutheticated,)
 
     @create_token
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        token = self.request.auth
+        user = Token.objects.get(key=token).user
+        queryset = User.objects.filter(id=user.id)
+        return queryset
 
 
 class CommentViewSet(ModelViewSet):
