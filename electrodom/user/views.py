@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework.throttling import AnonRateThrottle
 from rest_framework.viewsets import ViewSet, ModelViewSet
 
 from user.models import User, Comment, Basket
@@ -28,6 +29,7 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (AllowPostWithoutAutheticated,)
+    throttle_classes = [AnonRateThrottle]
 
     @create_token
     def create(self, request, *args, **kwargs):
