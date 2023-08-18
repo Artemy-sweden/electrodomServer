@@ -11,10 +11,22 @@ from user.serializers import UserSerializer, CommentSerializer, BasketSerializer
 from goods.models import Goods
 
 
+def create_token(func):
+    def wrapper(request, *args, **kwargs):
+        data = func(request, *args, **kwargs)
+        user_id = data.data['id']
+        user = User.objects.get(id=user_id)
+        token = Token.objects.create(user=user)
+        data.data['token'] = token.key
+        return data
+    return wrapper
+
+
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    @create_token
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
