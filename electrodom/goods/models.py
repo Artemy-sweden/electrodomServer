@@ -49,7 +49,6 @@ class Goods(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название товара')
     provider_id = models.ForeignKey(to=Providers, on_delete=models.CASCADE, null=True, verbose_name='Поставщик')
     category_id = models.ForeignKey(to=Categories, on_delete=models.CASCADE, null=True, verbose_name='Категория')
-    image = models.ImageField(upload_to='product_images', verbose_name='Изображение')
     price = models.DecimalField(decimal_places=2, max_digits=6, verbose_name='Цена')
     count = models.PositiveIntegerField(verbose_name='Количество')
     description = models.TextField(verbose_name='Описание')
@@ -76,7 +75,7 @@ class GoodsCharacteristic(models.Model):
 
 
 class Photo(models.Model):
-    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name='Фотография')
+    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name='Товар')
     path = models.ImageField(upload_to='photo', verbose_name='Фотография')
     for_card = models.BooleanField()
 

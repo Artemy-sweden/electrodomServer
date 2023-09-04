@@ -42,8 +42,18 @@ class GoodsSerializer(serializers.ModelSerializer):
     characteristics = GoodsCharacteristicSerializer(many=True, source='goodscharacteristic_set', required=False)
     category = CategorySerializer(source='category_id')
 
-    product_images = PhotoSerializer(many=True, source='photo_set.filter(for_card=True)')
-    general_images = PhotoSerializer(many=True, source='photo_set.filter(for_card=False)')
+    product_images = serializers.SerializerMethodField()
+    general_images = serializers.SerializerMethodField()
+
+    def get_product_images(self, obj):
+        # Filter product images where for_card=True
+        product_images = obj.photo_set.filter(for_card=True)
+        return PhotoSerializer(product_images, many=True).data
+
+    def get_general_images(self, obj):
+        # Filter general images where for_card=False
+        general_images = obj.photo_set.filter(for_card=False)
+        return PhotoSerializer(general_images, many=True).data
 
     class Meta:
         model = Goods
