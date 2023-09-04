@@ -78,7 +78,7 @@ class GoodsCharacteristic(models.Model):
 class Photo(models.Model):
     goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name='Фотография')
     path = models.ImageField(upload_to='photo', verbose_name='Фотография')
-    photo_type = models.BooleanField()
+    for_card = models.BooleanField()
 
 
 
