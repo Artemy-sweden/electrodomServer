@@ -73,3 +73,12 @@ class GoodsCharacteristic(models.Model):
 
     def __str__(self):
         return f'{self.characteristic}'
+
+
+class Photo(models.Model):
+    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name='Фотография')
+    path = models.ImageField(upload_to='photo', verbose_name='Фотография')
+    photo_type = models.BooleanField()
+
+
+
