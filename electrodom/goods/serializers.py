@@ -59,3 +59,10 @@ class GoodsSerializer(serializers.ModelSerializer):
         model = Goods
         fields = ['id', 'name', 'provider_id', 'category', 'price', 'count', 'description',
                   'characteristics', 'product_images', 'general_images']
+
+
+class GoodsShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Goods
+        fields = ['id', 'name', 'description']
+
