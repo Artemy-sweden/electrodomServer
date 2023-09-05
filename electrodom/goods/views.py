@@ -4,7 +4,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.viewsets import ModelViewSet
 
 from goods.models import Categories
-from goods.serializers import CategorySerializer
+from goods.serializers import CategorySerializer, GoodsShortSerializer
 from goods.serializers import ProviderSerializer
 
 from goods.models import Providers
@@ -32,6 +32,13 @@ class GoodsViewSet(ModelViewSet):
     filterset_fields = ['category_id', 'price', ]
     search_fields = ['description', 'name']
     ordering_fields = ['id', 'price']
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return GoodsSerializer
+        else:
+            return GoodsShortSerializer
+
 
 
 
