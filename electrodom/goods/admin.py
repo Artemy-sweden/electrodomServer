@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from goods.models import Categories, Characteristic, GoodsCharacteristic
+from goods.models import Categories, Characteristic, GoodsCharacteristic, Photo
 
 from goods.models import Providers
 
@@ -36,11 +36,15 @@ class GoodsCharacteristicInline(admin.StackedInline):
 class GoodsAdmin(admin.ModelAdmin):
     inlines = [GoodsCharacteristicInline]
     Goods.__str__.short_description = 'Товар'
-    fields = ('name', 'provider_id', 'category_id', 'image', 'get_html_photo', 'price', 'count', 'description')
-    readonly_fields = ('get_html_photo',)
+    fields = ('name', 'provider_id', 'category_id', 'price', 'count', 'description')
 
-    def get_html_photo(self, object):
-        if object.commenter_avatar:
-            return mark_safe(f"<img src='{object.image.url}' width=100>")
+    # def get_html_photo(self, object):
+    #     if object.commenter_avatar:
+    #         return mark_safe(f"<img src='{object.image.url}' width=100>")
+    #
+    # get_html_photo.short_description = 'Фото'
 
-    get_html_photo.short_description = 'Фото'
+
+@admin.register(Photo)
+class PhotoAdmin(admin.ModelAdmin):
+    pass
