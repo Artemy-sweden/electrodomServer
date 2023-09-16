@@ -108,9 +108,9 @@ WSGI_APPLICATION = 'electrodom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'electro6_goods',
+        'NAME': 'electro6_electrodomdb',
         'USER': 'electro6_admin',
-        'PASSWORD': 'Electrodom2023',
+        'PASSWORD': 'admin12345admin',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
