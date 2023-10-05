@@ -62,7 +62,9 @@ class GoodsSerializer(serializers.ModelSerializer):
 
 
 class GoodsShortSerializer(serializers.ModelSerializer):
+
+
     class Meta:
         model = Goods
-        fields = ['id', 'name', 'description']
+        fields = ['id', 'name', 'description', 'discount']
 

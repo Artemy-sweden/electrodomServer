@@ -52,6 +52,7 @@ class Goods(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=6, verbose_name='Цена')
     count = models.PositiveIntegerField(verbose_name='Количество')
     description = models.TextField(verbose_name='Описание')
+    discount = models.ForeignKey(to=Discount, on_delete=models.CASCADE, null=True)
 
     class Meta:
         verbose_name = 'товар'
@@ -80,4 +81,6 @@ class Photo(models.Model):
     for_card = models.BooleanField()
 
 
+class Discount(models.Model):
+    value = models.IntegerField()
 

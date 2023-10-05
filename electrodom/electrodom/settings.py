@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(BASE_DIR / '.env')
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+/sc/# Build paths inside the project like this: BASE_DIR / 'subdir'.
 from corsheaders.defaults import default_methods
 
 
