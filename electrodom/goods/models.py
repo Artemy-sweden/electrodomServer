@@ -1,16 +1,9 @@
 from django.db import models
 
-
-# class DBMixin(models.Model):
-#     # using = 'default'  # По умолчанию, используем default базу данных
-#
-#     class Meta:
-#         abstract = True
-#
-#     def save(self, *args, **kwargs):
-#         using_db = getattr(self, 'using', self.using)
-#         super().save(using=using_db, *args, **kwargs)
-
+class Discount(models.Model):
+    name = models.CharField(max_length=255)
+    percent = models.PositiveSmallIntegerField()
+    goods = models.ForeignKey(to=Goods, on_delete=models.CASCADE)
 
 class Providers(models.Model):
     provider_name = models.CharField(max_length=255, verbose_name='Имя поставщика')
