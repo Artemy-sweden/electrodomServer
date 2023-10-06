@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from goods.models import Categories, Characteristic, GoodsCharacteristic, Photo
+
+from goods.models import Categories, Characteristic, GoodsCharacteristic, Photo, Discount
 
 from goods.models import Providers
 
@@ -47,4 +48,8 @@ class GoodsAdmin(admin.ModelAdmin):
 
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Discount)
+class DiscountAdmin(admin.ModelAdmin):
     pass

@@ -1,9 +1,6 @@
 from django.db import models
 
-class Discount(models.Model):
-    name = models.CharField(max_length=255)
-    percent = models.PositiveSmallIntegerField()
-    goods = models.ForeignKey(to=Goods, on_delete=models.CASCADE)
+
 
 class Providers(models.Model):
     provider_name = models.CharField(max_length=255, verbose_name='Имя поставщика')
@@ -72,5 +69,10 @@ class Photo(models.Model):
     path = models.ImageField(upload_to='photo', verbose_name='Фотография')
     for_card = models.BooleanField()
 
+
+class Discount(models.Model):
+    name = models.CharField(max_length=255)
+    percent = models.PositiveSmallIntegerField()
+    goods = models.ForeignKey(to=Goods, on_delete=models.CASCADE)
 
 
