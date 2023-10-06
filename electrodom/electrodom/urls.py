@@ -4,16 +4,14 @@ from rest_framework.routers import DefaultRouter
 from .yasg import urlpatterns as doc_urls
 
 from user.views import UserViewSet, CommentViewSet, BasketViewSet
-from goods.views import CategoriesViewSet
-from goods.views import ProvidersViewSet
 from goods.views import GoodsViewSet
 
 
 router = DefaultRouter()
-router.register('categories', CategoriesViewSet)
+# router.register('categories', CategoriesViewSet)
 router.register('users', UserViewSet)
 router.register('comments', CommentViewSet)
-router.register('providers', ProvidersViewSet)
+# router.register('providers', ProvidersViewSet)
 router.register('baskets', BasketViewSet)
 router.register('goods', GoodsViewSet)
 
