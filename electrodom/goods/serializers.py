@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from goods.models import Categories, Characteristic, GoodsCharacteristic, Photo
+from goods.models import Categories, Characteristic, GoodsCharacteristic, Photo, Discount
 
 from goods.models import Providers
 
@@ -62,7 +62,28 @@ class GoodsSerializer(serializers.ModelSerializer):
 
 
 class GoodsShortSerializer(serializers.ModelSerializer):
+    discount = serializers.SerializerMethodField()
+    product_images = serializers.SerializerMethodField()
+
+    def get_product_images(self, obj):
+        # Filter product images where for_card=True
+        product_images = obj.photo_set.filter(for_card=True)
+        return PhotoSerializer(product_images, many=True).data
+
+    def get_discount(self, obj):
+        discount = Discount.objects.filter(goods=obj).first()
+
+        if discount:
+            return {
+                'name': discount.name,
+                'percent': discount.percent,
+            }
+        return
+
+
+
+
     class Meta:
         model = Goods
-        fields = ['id', 'name', 'description']
+        fields = ['id', 'name', 'description', 'price', 'product_images', 'discount']
 
