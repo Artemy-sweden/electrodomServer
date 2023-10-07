@@ -13,20 +13,14 @@ from goods.serializers import GoodsSerializer
 
 from goods.models import Goods
 
+from goods.permissions import OnlyGetRequest
 
-class CategoriesViewSet(ModelViewSet):
-    queryset = Categories.objects.all()
-    serializer_class = CategorySerializer
-
-
-class ProvidersViewSet(ModelViewSet):
-    queryset = Providers.objects.all()
-    serializer_class = ProviderSerializer
 
 
 class GoodsViewSet(ModelViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
+    permission_classes = (OnlyGetRequest,)
     pagination_class = LimitOffsetPagination
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['category_id', 'price', ]
