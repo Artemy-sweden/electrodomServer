@@ -116,14 +116,20 @@ WSGI_APPLICATION = 'electrodom.wsgi.application'
 #     }
 # }
 
+name = 'electro6_electrodomdb'
+user = 'electro6_admin'
+password = 'admin12345admin'
+host = 'localhost'
+port = '3306'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'electro6_electrodomdb',
-        'USER': 'electro6_admin',
-        'PASSWORD': 'admin12345admin',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': name,
+        'USER': user,
+        'PASSWORD': password,
+        'HOST': host,
+        'PORT': port,
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
