@@ -7,6 +7,7 @@ from user.views import UserViewSet, CommentViewSet, BasketViewSet
 from goods.views import GoodsViewSet
 
 
+
 router = DefaultRouter()
 # router.register('categories', CategoriesViewSet)
 router.register('users', UserViewSet)
