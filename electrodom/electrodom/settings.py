@@ -117,8 +117,8 @@ WSGI_APPLICATION = 'electrodom.wsgi.application'
 # }
 
 name = 'electro6_electrodomdb'
-user = 'electro6_admin'
-password = 'admin12345admin'
+user = 'root'
+password = 'admin'
 host = 'localhost'
 port = '3306'
 
