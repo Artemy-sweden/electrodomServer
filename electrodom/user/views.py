@@ -5,7 +5,10 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle
 from rest_framework.viewsets import ViewSet, ModelViewSet
+from djoser.views import TokenCreateView
+from django.contrib.auth.hashers import make_password
 
+from django.http import QueryDict
 from user.models import User, Comment, Basket
 from user.permissions import AllowPostWithoutAutheticated
 
@@ -33,6 +36,16 @@ class UserViewSet(ModelViewSet):
 
     @create_token
     def create(self, request, *args, **kwargs):
+        # Создайте новый QueryDict с обновленными данными
+        new_querydict = QueryDict('', mutable=True)
+        new_querydict.update(request.data)
+
+        # Внесите необходимые изменения
+        new_querydict['password'] = make_password(request.data['password'])
+
+        # Обновите данные в объекте запроса
+        request._full_data = new_querydict
+
         return super().create(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -55,9 +68,6 @@ class BasketViewSet(ModelViewSet):
     serializer_class = BasketSerializer
 
     def create(self, request, *args, **kwargs):
-        print('------------------------------------------')
-        print(request.data['user'])
-        print('------------------------------------------')
         user = User.objects.get(id=request.data['user'])
         goods = Goods.objects.get(id=request.data['goods'])
         baskets = Basket.objects.filter(user=user, goods=goods)
